@@ -63,7 +63,7 @@ func main() {
 		viewRoutes.GET("/videos", videoController.ShowAll)
 	}
 
-	port := os.Getenv("POST")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = "5000"
 	}
