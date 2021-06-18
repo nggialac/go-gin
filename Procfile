@@ -1,1 +1,1 @@
-web: bin/go-gin-poc
+web: bin/go-gin
