@@ -5,15 +5,16 @@
 [GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
 [GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
 [GIN-debug] Loaded HTML Templates (4): 
-	- index.html
 	- 
 	- footer.html
 	- header.html
+	- index.html
 
-[GIN-debug] GET    /api/test                 --> main.main.func1 (4 handlers)
-[GIN-debug] GET    /api/videos               --> main.main.func2 (4 handlers)
-[GIN-debug] POST   /api/videos               --> main.main.func3 (4 handlers)
-[GIN-debug] GET    /view/videos              --> github.com/lacnguyen/go-gin/controller.VideoController.ShowAll-fm (4 handlers)
+[GIN-debug] POST   /api/v1/auth/token        --> github.com/lacnguyen/go-gin/api.(*VideoApi).Authenticate-fm (3 handlers)
+[GIN-debug] GET    /api/v1/videos            --> github.com/lacnguyen/go-gin/api.(*VideoApi).GetVideos-fm (4 handlers)
+[GIN-debug] POST   /api/v1/videos            --> github.com/lacnguyen/go-gin/api.(*VideoApi).CreateVideo-fm (4 handlers)
+[GIN-debug] PUT    /api/v1/videos/:id        --> github.com/lacnguyen/go-gin/api.(*VideoApi).UpdateVideo-fm (4 handlers)
+[GIN-debug] DELETE /api/v1/videos/:id        --> github.com/lacnguyen/go-gin/api.(*VideoApi).DeleteVideo-fm (4 handlers)
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] GET    /view/videos              --> github.com/lacnguyen/go-gin/controller.VideoController.ShowAll-fm (3 handlers)
 [GIN-debug] Listening and serving HTTP on :5000
-::1 - [18 Jun 21 20:17 +07] GET /api/videos 401 0s 
-::1 - [18 Jun 21 20:17 +07] GET /api/videos 200 571.6µs 

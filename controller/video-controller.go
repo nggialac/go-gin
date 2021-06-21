@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -13,6 +14,8 @@ import (
 type VideoController interface {
 	FindAll() []entity.Video
 	Save(c *gin.Context) error
+	Update(c *gin.Context) error
+	Delete(c *gin.Context) error
 	ShowAll(c *gin.Context)
 }
 
@@ -30,10 +33,6 @@ func New(service service.VideoService) VideoController {
 	}
 }
 
-func (vc *videoController) FindAll() []entity.Video {
-	return vc.videoService.FindAll()
-}
-
 func (vc *videoController) Save(c *gin.Context) error {
 	var video entity.Video
 	err := c.ShouldBindJSON(&video)
@@ -48,6 +47,39 @@ func (vc *videoController) Save(c *gin.Context) error {
 	return nil
 }
 
+func (vc *videoController) Update(c *gin.Context) error {
+	var video entity.Video
+	err := c.ShouldBindJSON(&video)
+	if err != nil {
+		return err
+	}
+
+	id, err := strconv.ParseUint(c.Param("id"), 0, 0)
+	if err != nil {
+		return err
+	}
+	video.ID = id
+
+	err = validate.Struct(video)
+	if err != nil {
+		return err
+	}
+	vc.videoService.Update(video)
+	return nil
+}
+
+func (vc *videoController) Delete(c *gin.Context) error {
+	var video entity.Video
+	id, err := strconv.ParseUint(c.Param("id"), 0, 0)
+	if err != nil {
+		return err
+	}
+	video.ID = id
+
+	vc.videoService.Delete(video)
+	return nil
+}
+
 func (ctl *videoController) ShowAll(c *gin.Context) {
 	videos := ctl.videoService.FindAll()
 	data := gin.H{
@@ -55,4 +87,8 @@ func (ctl *videoController) ShowAll(c *gin.Context) {
 		"videos": videos,
 	}
 	c.HTML(http.StatusOK, "index.html", data)
+}
+
+func (vc *videoController) FindAll() []entity.Video {
+	return vc.videoService.FindAll()
 }
