@@ -3,7 +3,7 @@
 ## Go Module Init
 
 ```bash
-go mod init github.com/lacnguyen/go-gin
+go mod init github.com/nggialac/go-gin
 ```
 
 ## Gin-Gonic library: github.com/gin-gonic/gin
